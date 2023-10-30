@@ -15,9 +15,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private double operand1 = Double.NaN;
     private double operand2;
     private double memory = 0.0;
-    public static boolean isDecimal(double num) {
-        return num % 1 != 0;
+    private boolean empty = false;
+
+    public static boolean isDecimal(double result) {
+        return result % 1 != 0;
     }
+    public void NormalAnswer(double result){
+        if (!isDecimal(result)){
+            int intValue = (int) result;
+            input = String.valueOf(intValue);
+        }
+        else {
+            input = String.valueOf(result);
+        }
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,18 +59,69 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (buttonText) {
 
             case "0":
+                if(empty){
+                    input = "";
+                }
+                empty = false;
+
             case "1":
+                if(empty){
+                    input = "";
+                }
+                empty = false;
+
             case "2":
+                if(empty){
+                    input = "";
+                }
+                empty = false;
+
             case "3":
+                if(empty){
+                    input = "";
+                }
+                empty = false;
+
             case "4":
+                if(empty){
+                    input = "";
+                }
+                empty = false;
+
             case "5":
+                if(empty){
+                    input = "";
+                }
+                empty = false;
+
             case "6":
+                if(empty){
+                    input = "";
+                }
+                empty = false;
+
             case "7":
+                if(empty){
+                    input = "";
+                }
+                empty = false;
+
             case "8":
+                if(empty){
+                    input = "";
+                }
+                empty = false;
+
             case "9":
+                if(empty){
+                    input = "";
+                }
+                empty = false;
+
 
             case ".":
                 input += buttonText;
+
                 break;
 
             case "+":
@@ -76,30 +139,82 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (!input.isEmpty() && !Double.isNaN(operand1)) {
                     operand2 = Double.parseDouble(input);
                     double result = performOperation(operand1, operand2, operator);
-                    if (!isDecimal(result)){
-                        int intValue = (int) result;
-                        input = String.valueOf(intValue);
-                    }
-                    else {
-                        input = String.valueOf(result);
-                    }
+                    NormalAnswer(result);
                     operand1 = result;
                     operator = "";
+                    empty = true;
                 }
                 break;
             case "±":
+                if (!input.isEmpty()) {
+                    double num = Double.parseDouble(input);
+                    num = -num;
+                    NormalAnswer(num);
+                }
+                break;
             case "√":
+                if (!input.isEmpty()) {
+                    double num = Double.parseDouble(input);
+                    num = Math.sqrt(num);
+                    NormalAnswer(num);
+                }
+                break;
             case "1/x":
+                if (!input.isEmpty()) {
+                    double value = Double.parseDouble(input);
+                    if (value != 0) {
+                        value = 1 / value;
+                        NormalAnswer(value);
+                    } else {
+                        input = "Error";
+                    }
+                }
+                break;
 
             case "CE":
+                input = "";
+                break;
+
             case "C":
+                input = "";
+                operand1 = Double.NaN;
+                operator = "";
+                break;
+
             case "←":
+                if (!input.isEmpty()) {
+                    input = input.substring(0, input.length() - 1);
+                }
+                break;
 
             case "M+":
+                if (!input.isEmpty()) {
+                    double value = Double.parseDouble(input);
+                    memory += value;
+                }
+                break;
+
             case "M-":
+                if (!input.isEmpty()) {
+                    double value = Double.parseDouble(input);
+                    memory -= value;
+                }
+                break;
+
             case "MC":
+                memory = 0.0;
+                break;
+
             case "MR":
+                NormalAnswer(memory);
+                break;
+
             case "MS":
+                if (!input.isEmpty()) {
+                    memory = Double.parseDouble(input);
+                }
+                break;
+
         }
         calculatorScreen.setText(input);
     }
