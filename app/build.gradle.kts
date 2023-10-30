@@ -4,7 +4,7 @@ plugins {
 
 android {
     namespace = "com.example.madt_3_lab_calculator"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.example.madt_3_lab_calculator"
