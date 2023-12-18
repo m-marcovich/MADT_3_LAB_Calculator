@@ -10,12 +10,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView calculatorScreen;
+    private Calculator calculator;
     private String input = "";
     private String operator = "";
     private double operand1 = Double.NaN;
     private double operand2;
     private double memory = 0.0;
     private boolean empty = false;
+    private boolean isZero = false;
 
     public static boolean isDecimal(double result) {
         return result % 1 != 0;
@@ -38,6 +40,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         calculatorScreen = findViewById(R.id.calculatorScreen);
 
+        calculator = new Calculator();
+
         Button[] buttons = new Button[]{
                 findViewById(R.id.MC), findViewById(R.id.MR), findViewById(R.id.MS), findViewById(R.id.MPlus), findViewById(R.id.MMinus),
                 findViewById(R.id.back), findViewById(R.id.ClearEntry), findViewById(R.id.clear), findViewById(R.id.PlusMinus), findViewById(R.id.SquareRoot),
@@ -59,60 +63,120 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (buttonText) {
 
             case "0":
+                if (input.length()==1 && !input.equals("0")) {
+                    isZero = false;
+                }
+                if (input.length()==1 && input.equals("0")) {
+                    isZero = true;
+                }
                 if(empty){
                     input = "";
                 }
                 empty = false;
 
             case "1":
+                if (input.length()==1 && !input.equals("0")) {
+                    isZero = false;
+                }
+                if (isZero){
+                    input = "";
+                }
                 if(empty){
                     input = "";
                 }
                 empty = false;
 
             case "2":
+                if (input.length()==1 && !input.equals("0")) {
+                    isZero = false;
+                }
+                if (isZero){
+                    input = "";
+                }
                 if(empty){
                     input = "";
                 }
                 empty = false;
 
             case "3":
+                if (input.length()==1 && !input.equals("0")) {
+                    isZero = false;
+                }
+                if (isZero){
+                    input = "";
+                }
                 if(empty){
                     input = "";
                 }
                 empty = false;
 
             case "4":
+                if (input.length()==1 && !input.equals("0")) {
+                    isZero = false;
+                }
+                if (isZero){
+                    input = "";
+                }
                 if(empty){
                     input = "";
                 }
                 empty = false;
 
             case "5":
+                if (input.length()==1 && !input.equals("0")) {
+                    isZero = false;
+                }
+                if (isZero){
+                    input = "";
+                }
                 if(empty){
                     input = "";
                 }
                 empty = false;
 
             case "6":
+                if (input.length()==1 && !input.equals("0")) {
+                    isZero = false;
+                }
+                if (isZero){
+                    input = "";
+                }
                 if(empty){
                     input = "";
                 }
                 empty = false;
 
             case "7":
+                if (input.length()==1 && !input.equals("0")) {
+                    isZero = false;
+                }
+                if (isZero){
+                    input = "";
+                }
                 if(empty){
                     input = "";
                 }
                 empty = false;
 
             case "8":
+                if (input.length()==1 && !input.equals("0")) {
+                    isZero = false;
+                }
+                if (isZero){
+                    input = "";
+                }
                 if(empty){
                     input = "";
                 }
                 empty = false;
 
             case "9":
+                if (input.length()==1 && !input.equals("0")) {
+                    isZero = false;
+                }
+                if (isZero){
+                    input = "";
+                }
                 if(empty){
                     input = "";
                 }
@@ -138,7 +202,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case "=":
                 if (!input.isEmpty() && !Double.isNaN(operand1)) {
                     operand2 = Double.parseDouble(input);
-                    double result = performOperation(operand1, operand2, operator);
+                    double result = calculator.performOperation(operand1, operand2, operator);
                     NormalAnswer(result);
                     operand1 = result;
                     operator = "";
@@ -217,25 +281,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
         calculatorScreen.setText(input);
-    }
-         private double performOperation(double operand1, double operand2, String operator){
-            switch (operator) {
-                case "+":
-                    return operand1 + operand2;
-                case "-":
-                    return operand1 - operand2;
-                case "*":
-                    return operand1 * operand2;
-                case "/":
-                    if (operand2 != 0) {
-                        return operand1 / operand2;
-                    } else {
-                        return Double.NaN;
-                    }
-                case "%":
-                    return operand1 * (operand2 / 100);
-                default:
-                    return operand2;
-        }
     }
 }
